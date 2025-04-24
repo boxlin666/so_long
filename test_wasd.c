@@ -1,10 +1,12 @@
 #include "mlx.h"
 #include <stdlib.h>
+#include <unistd.h> // For usleep
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
 #define RECT_SIZE 50
 #define MOVE_SPEED 5
+#define DELAY_US 33333 // 33.33ms delay (~30 FPS)
 
 typedef struct s_data {
     void *mlx;
@@ -68,6 +70,9 @@ int update(t_data *data)
 
     // Draw rectangle
     draw_rectangle(data);
+
+    // Add delay to reduce frame rate
+    usleep(DELAY_US);
 
     return (0);
 }
